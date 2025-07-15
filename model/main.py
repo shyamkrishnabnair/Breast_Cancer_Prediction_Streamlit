@@ -3,6 +3,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+import pickle as pkl
+
 
 def get_clean_data():
     #laod the data
@@ -44,7 +46,13 @@ def main():
     # print(data.head())  # Display the first few rows of the cleaned data
     # print(data.info())  # Display information about the DataFrame
 
-    model = create_model(data)
+    model,scaler = create_model(data)
+
+    with open('model/model.pkl','wb') as f:
+        pkl.dump(model,f)
+
+    with open('model/scaler.pkl','wb') as f:
+        pkl.dump(scaler,f)
 
 
 if __name__ == "__main__":
